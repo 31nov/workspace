@@ -1,0 +1,8 @@
+{% include "header.html" %}
+        <h1>{{poll.name}}</h1>
+        <ul>
+            {% for x in poll.choice_list %}
+            <li><a href="#">{{x.name}}</a></li>
+            {% endfor %}
+        </ul>
+{% include "footer.html" %}
