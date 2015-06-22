@@ -1,0 +1,21 @@
+{% include 'header.html' %}
+    <h1>설문 추가하기</h1>
+    <hr>
+    {% if error_message %}
+        <p style="color:blue;">{{error_message}}</p>
+    {% endif %}
+    <form method="post" action="/polls/submit/">
+        {% csrf_token %}
+        <label for="question">Question</label>
+        <input type="text" name="question">
+        <br>
+        <label for="choice1">choice1</label>
+        <input type="text" name="choice1">
+        <br>
+        <label for="choice2">choice2</label>
+        <input type="text" name="choice2">
+        <br>
+        <input type="submit" value="OK">
+        <a href="/polls">Cancel</a>
+    </form>
+{% include 'footer.html' %}

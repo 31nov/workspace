@@ -5,6 +5,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
     {% load staticfiles %}
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+    
 	<link rel="stylesheet" href='{% static "css/index.css" %}'>
 	<title>31nov</title>
 </head>
@@ -14,7 +15,7 @@
 		<header>
 			<div class="header_single v">
 				<h1>31nov 메인 페이지</h1>
-								  <button class="gamebtn" type="button">
+                  <button class="gamebtn" type="button">
                       <img src='{% static "image/gamebtn.png" %}'>
                       <span class="gamebtnToggle">추천메뉴 열기</span>
 				  </button>
@@ -27,80 +28,55 @@
 				</form>
 			</div>
             <ul class="gamelist">
-                <li>Recommended <br><b>Game</b></br></li>
+                <li>Recommended <br><b>Game</b><br></li>
                     <ul id="gamelistul">
+                        {% for a in games %}
                         <li>
-                            <a href="game0">
-                                <img class="gameImg" src="#">
-                                <em class="gameTitle"></em>
-                                <span class="comment"></span>
+                            <a href="#">
+                                <img class="gameImg" src='/static/image/{{a.gameImage}}'>
+                                <em class="gameTitle">{{a.game}}</em>
+                                <span class="comment">{{a.gameComment}}</span>
                             </a>
                         </li>
+                        {% endfor %}
                     </ul>
             </ul>
 		</header>
 		<main id="main">
             <ul>
+           {% for article in articles %}
                 <li><!--게시판 리스트-->
                     <div class="scatchTape">
-                        <div class="triangle1"></div>
-                        <div class="triangle2"></div>
-                        <div class="triangle3"></div>
-                        <div class="triangle4"></div>
-                        <div class="triangle5"></div>
-                        <div class="triangle6"></div>
+                        <div class="triangle1"></div><div class="triangle2"></div><div class="triangle3"></div>
+                        <div class="triangle4"></div><div class="triangle5"></div><div class="triangle6"></div>
                     </div>
+                    <small>{{article.id}}</small>
                     <div class="clip">
                         <img src='{% static "image/clip.png" %}'>
                     </div>
                     <div>
-                        <div class="circle1 a e"></div>
-                        <div class="circle1 b e"></div>
-                        <div class="circle1 c e"></div>
-                        <div class="circle1 a d"></div>
-                        <div class="circle1 b d"></div>
-                        <div class="circle1 c d"></div>
+                        <div class="circle1 a e"></div><div class="circle1 b e"></div><div class="circle1 c e"></div>
+                        <div class="circle1 a d"></div><div class="circle1 b d"></div><div class="circle1 c d"></div>
                     </div>
                     <a class="writeUserInfor">
-                        <img class="userPic"><!--작성자 사진-->
+                        <img class="emptyPic" src='{% static "image/emptyUser.png" %}'>
+                        <img class="userPic" src='{{article.user.profile.pic}}'><!--작성자 사진-->
                         <span>
-                            <p class="userName"></p><br><!--작성자 명-->
+                            <p class="userName">{{article.user.username}}</p><br><!--작성자 명-->
                         </span>
                         <div class="circle"></div>
                     </a>
-                    <p class="writeDate"></p><br><!--작성 일자, 시간-->
+                    <p class="writeDate">{{article.written_date}}</p><br><!--작성 일자, 시간-->
                     <div class="writeTitleDiv">
-                        <span class="writeTitle"></span><!--게시글 제목-->
+                        <span class="writeTitle">{{article.title}}</span><!--게시글 제목-->
                     </div>
-                    <div class="overView">
+                    <div class="overView"><!--글 내용-->
                         <article>
-                            1<br>
-                            2<br>
-                            3<br>
-                            4<br>
-                            5<br>
-                            6<br>
-                            7<br>
-                            7<br>
-                            7<br>
-                            7<br>
-                            7<br>
-                            7<br>
-                            7<br>
-                            7<br>
-                            7<br>
-                            7<br>
-                            7<br>
-                            7<br>
-                            7<br>
-                            7<br>
-                            7<br>
-                            7<br>
-                            7<br>
-                            7<br>
-                            7<br>
-                            7<br>
-                            7<br>
+                        <hr>
+                        {% if article.file_image != 'X' %}
+                            <img class="image" src="{{article.file_image}}"><br>
+                        {% endif %}
+                            {{article.content}}
                         </article>
                         <!--친구 확인 여부-->
                         <div class="countView"><!--block-->
@@ -134,6 +110,7 @@
                             </ul>
                         </div>
                     </div>
+            {% endfor %}
                 </li>
             </ul>
         </main>
@@ -215,89 +192,36 @@
 				친구가 좋아하는 항목보기
 			</button>
 			<span class="userlogin">
+				{% if user.is_authenticated %}
 				<strong class="username">
-					31nov 
-				</strong> 
-				<button class="login btn btn-primary btn-lg" type="button" data-toggle="modal" data-target="#myModal">
+					{{user.username}} 
+				</strong>
+                <a class="login btn btn-primary btn-lg" type="button" href="{% url 'user_logout' %}">
 					<img src='{% static "image/login.png" %}'>
 					로그아웃하기
-				</button>
-                <!-- Log In modal -->
-                <!-- Modal -->
-                <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-                    <div class="modal-dialog">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                            <h4 class="modal-title" id="myModalLabel">Log In</h4>
-                            </div>
-                                <!--  LogIn : Email, P/W 작성 공간   -->
-                                <div class="login_body modal-body">
-                                    <form class="logInForm form-inline">
-                                        <div class="form-group">
-                                            <label class="sr-only" for="loginEmail">Email address</label>
-                                            <input type="email" class="form-control" id="loginEmail" placeholder="E-mail" required>
-                                        </div>
-                                        <div class="form-group">
-                                            <label class="sr-only" for="loginPassword">Password</label>
-                                            <input type="password" class="form-control" id="loginPassword" placeholder="Password" required>
-                                        </div>
-                                        <div class="checkbox">
-                                            <label>
-                                                <input type="checkbox"> Remember me
-                                            </label>
-                                            <label>
-                                                <a>Forget Password?</a>
-                                            </label>
-                                            <label>
-                                                <a>Forget E-mail?</a>
-                                            </label>
-                                        </div>
-                                </div>
-                                    <button type="submit" class="signIn btn btn-default">Sign in</button>
-                                    </form>
-                                <!--  LogIn : Email, P/W 작성 공간   -->
-                                <!--  create ID START   -->
-                                <div class="create_body modal-body">
-                                    <form class="createInForm form-horizontal" action="" method="POST">
-                                        <div class="form-group">
-                                            <label for="createName">Name</label>
-                                            <input type="text" class="form-control" id="createName" placeholder="Enter Name" value="{{userName}}" required>
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="createEmail">Email (ID)</label>
-                                            <input type="email" class="form-control" id="createEmail" placeholder="Enter email" value="{{userEmail}}" required>
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="createPassword">Password</label>
-                                            <input type="password" class="form-control" id="createPassword" placeholder="Password" value="{{userPassword}}" required>
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="createRePassword">Repeat Password</label>
-                                            <input type="password" class="form-control" id="createRePassword" placeholder="Repeat Password" value="{{userName}}" required>
-                                            <p>비밀번호를 한번 더 써주세요.</p>
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="exampleInputFile">File input</label>
-                                            <input type="file" id="exampleInputFile">
-                                            <p class="help-block">Example block-level help text here.</p>
-                                        </div>
-                                </div>
-                                <div class="modal-footer">
-                                    <div class="checkbox2">
-                                        <a>create ID</a>
-                                        <a class="login">log in</a>
-                                    </div>
-                                    <button type="submit" class="createIn btn btn-default" value="OK">Create</button>
-                                </div>
-                                    </form>
-                                <!--  create ID END   -->
-                        </div>
-                    </div>
-                </div>
-                <!-- Log In modal -->
+				</a>
+               {%else%}
+                <strong class="username">
+					로그인 
+				</strong>
+				<form method="post" action="{% url 'django.contrib.auth.views.login' %}" class="login btn btn-primary btn-lg" role="login">
+                    {% csrf_token %}
+                    <button type="submit">
+                        <img src='{% static "image/login.png" %}'>
+                        로그인하기
+                    </button>
+                </form>
+               {%endif%}
+
 			</span>
 		</div>
+        {% if user.is_authenticated %}
+        <div class="write">
+            <button>
+                <a href="{% url 'write' %}"><img src='{% static "image/writeIcon.png" %}'>글쓰기</a>
+            </button>
+        </div>
+       {%endif%}
     	<footer>
 			<p>Copyright &copy; 31nov All rights reserved.</p>
 		</footer>
@@ -308,6 +232,7 @@
     </div>
 -->
     <script src="https://code.jquery.com/jquery-1.11.2.js"></script>
+    <script src="https://code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
     <script src='{% static "js/index.js" %}'></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
 </body>

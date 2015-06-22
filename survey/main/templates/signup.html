@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    {% load staticfiles %}
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+	<link rel="stylesheet" href='{% static "css/login_signup.css" %}'>
+<title>{{title}}</title>
+</head>
+<body>
+    <div class="header_body">
+        <header>
+            <div class="header_single v">
+                <a class="titleimage" href="{% url 'index' %}">
+                    <img src='{% static "image/title.png" %}'>
+                </a>
+                    <h4>{{h4}}</h4>
+            </div>
+        </header>
+		<main id="main">
+                <form class="createInForm" action="{% url 'signup_submit' %}" method="POST">
+                    {% csrf_token %}
+                    <div class="form-group a">
+                        <label for="username">Email (ID)<sup> 필수항목</sup></label>
+                        <input name="username" type="email" class="form-control idInput" placeholder="Enter email" value="{{userEmail}}" required>
+                        <p>영문, 숫자, 특수문자( @ . + - _ )만 가능합니다.</p>
+                    </div>
+                    <div class="form-group b">
+                        <label for="password">Password<sup> 필수항목</sup></label>
+                        <input name="password" id="createPassword" type="password" class="form-control pw" placeholder="Password" value="{{userPassword}}" required>
+                        <p>4자리 이상이어야 합니다.</p>
+                    </div>
+                    <div class="form-group c">
+                        <label for="password_confirm">Repeat Password<sup> 필수항목</sup></label>
+                        <input name="password_confirm" id="createRePassword" type="password" class="form-control pw" placeholder="Repeat Password" value="{{userName}}" required>
+                        <p>비밀번호를 한번 더 써 주세요.</p>
+                    </div>
+                    <div class="form-group">
+                        <label for="userPic">File input</label>
+                        <input type="file" name="userPic">
+                    </div>
+                    <div id="signInDiv">
+                        <button type="submit" class="createIn btn btn-default" disabled>Create</button>
+                    </div>
+                </form>
+            <div class="modal-footer">
+                <div class="checkbox2">
+                    <a href="{% url 'login' %}">log in</a>
+                </div>
+            </div>
+        </main>
+    	<footer>
+			<p>Copyright &copy; 31nov All rights reserved.</p>
+		</footer>
+	</div>
+<!--
+    <div id="test">
+        확인
+    </div>
+-->
+    <script src="https://code.jquery.com/jquery-1.11.2.js"></script>
+    <script src='{% static "js/login_signup.js" %}'></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+</body>
+</html>
+
+<!--			#main-->
+            
+<!--
+            <p> 득점 현황 : </p><span class="totalPoint">0점</span>
+            <div id="point" class='1point'>1점</div>
+            <div id="point" class='2point'>2점</div>
+            <div id="point" class='3point'>3점</div>
+            <div>점수대 별 골 수</div>
+            <div class="total1Point">1점 득점 : 0골</div>
+            <div class="total2Point">2점 득점 : 0골</div>
+            <div class="total3Point">3점 득점 : 0골</div>
+-->

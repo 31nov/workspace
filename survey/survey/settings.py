@@ -91,10 +91,14 @@ STATICFILES_DIRS = (
     ("css","/Users/Mac/workspace/survey/main/static/css/"),
     ("image","/Users/Mac/workspace/survey/main/static/image/"),
 )
+LANGUAGE_CODE = 'ko-KR'
+TIME_ZONE = 'Asia/Seoul'
+LOGIN_URL = '/login'
 
 
-
-
+##file 연결
+MEDIA_URL = '/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'main/media/')
 
 
 

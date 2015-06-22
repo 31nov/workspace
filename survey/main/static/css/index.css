@@ -79,12 +79,12 @@
     }
     .gamelist>li{
         display: block;
-        width: 112px;
         color: #fff;
         font-size: 14px;
         text-align: right;
         padding: 3px;
-        background: #F28972;   
+        background: #F28972;  
+        margin: 0;
     }
     #gamelistul {
 /*        background: #547812;*/
@@ -95,13 +95,6 @@
         height: 136px;
         padding: 0;
     }
-    #gamelistul li:nth-child(even) {
-        background: #F28972;
-    }
-    #gamelistul li:nth-child(odd) {
-        background: #fff7f7;
-    }
-    
     #gamelistul li a{
         position: relative;
         text-decoration: none;
@@ -142,7 +135,6 @@
 	.lnbbtn{
 		position: fixed;
 		top: 50%;
-        left: 0;
 		width: 26px;
 		height: 45px;
 	 	border: 0;
@@ -282,10 +274,11 @@
         height: 0;/*js 5.에서 설정*/
         background: #F2EEAE;
         border-radius: 5px;
+        min-height: 100px;
     }
-    #main sup{
+    #main small{
         position: absolute;
-        top: 14px;
+        top: 9px;
         left: 18px;
         display: block;
         margin: 0 4px;
@@ -385,10 +378,21 @@
                 margin: 2px;
                 border-radius: 4px;
                 float: left;
+                position: absolute;
+            }
+            .emptyPic{
+                display: inline-block;
+                width: 0;/*js 5.에서 설정*/
+                height: 0;/*js 5.에서 설정*/
+                margin: 2px;
+                border-radius: 4px;
+                float: left;
+                position: absolute;
+                left: 0;
             }
             .userName{
                 display: inline-block;
-                margin: 0;
+                margin: 0 0 0 53px;
                 padding: 32px 0 0 6px;
                 color: #000;
 /*                color: #FFC519;*/
@@ -429,6 +433,9 @@
                     font-weight: 300;
                     text-overflow: ellipsis;
                 }
+        .image{
+            width: 100%;   
+        }
         .hiddenView{
             display: none;
         }
@@ -436,7 +443,7 @@
             display: none;
             position: relative;
             box-sizing: border-box;
-            min-height: 220px;
+/*            min-height: 220px;*/
             top: 32px;
             background: #fff;
             border-bottom-right-radius: 5px;
@@ -448,7 +455,7 @@
             box-sizing: border-box;
             margin: 0;
             padding: 8px;
-            min-height: 220px;
+/*            min-height: 220px;*/
         }
         .countView{
             box-sizing: border-box;
@@ -575,50 +582,25 @@
                 border: 0;
                 background: rgba(0, 0, 0, 0);
             }
-            .login>img{
+            .login:hover,.login:focus{
+                background: none;
+                border: 0;
+                color: rgba(0, 0, 0, 0);
+            }
+            .login button{
+                background: none;   
+                border: 0;
+                width: 100%;
+                height: 100%;
+                padding: 0;
+            }
+            .login button >img, .login>img{
                 width: 100%;
                 height: 100%;
                 position: absolute;
                 top: 0;
                 left: 0;
             }
-            .btn-primary:hover,
-            .btn-primary:focus{
-                border: 0;
-                color: rgba(0,0,0,0);
-                background: rgba(0,0,0,0);
-            }
-    /* 로그인 팝업 START*/
-    .checkbox label{
-        float: right;
-    }
-    .checkbox label:first-child{
-        float: none;   
-    }
-    .checkbox2{
-        display: inline-block;
-        float: left;
-    }
-    .checkbox2 a{
-        display: inline-block;
-        text-align: right;
-        cursor: pointer;
-        color: #337ab7;   
-    }
-    .signIn{
-        position: absolute;
-        right: 15px;
-        bottom: 8px;
-    }
-    .createInForm{
-        padding: 0 15px;   
-    }
-    .form-group p:first-child{
-        font-size: 12px;
-        color: #525252;
-        padding-left: 10px;
-    }
-    /* 로그인 팝업 END*/
     footer{
 		margin: 30px 0 50px 0px;
         border-top: 1px solid #808080;
@@ -634,12 +616,6 @@
         background-color: blue;
     }
 /*List Open or Close*/
-.listOn{
-    
-}
-.listOff{
-    display: none !important;   
-}
 .clip{
     display: none;
     position: absolute;
@@ -653,32 +629,34 @@
         height: 100%;
     }
 
-/*
-#test{
+.write button{
     position: fixed;
-    width: 50px;
+    bottom: 80px;
+    
+    width: 80px;
     height: 50px;
-    top: 50%;
-    left: 50%;
-    background: blue;
+    border-bottom-right-radius: 25px;
+    border-top-right-radius: 25px;
+    border: 0;
 }
-*/
-/*}*/
-/*Tablet*/
-/*
-@media (min-width: 768px) and (max-width: 1024px){
-		h1{color: #F28972;}
-	.gamebtn{
-		display: none;
-	}
+    .write a{
+        position: absolute;
+        top: 5px;
+        left: 35px;
+        width: 40px;
+        height: 40px;
+        border-radius: 20px;
+        overflow: hidden;
+    }
+    .write button>a>img{
+        position: relative;
+        width: 100%;
+        height: 100%;
+    }
 
-}
-DESKTOP
-@media (min-width: 1025px){
-	h1{color: #0f0;}
-	.gamebtn{
-		display: none;
-	}
 
-}
-*/
+
+
+
+
+
